@@ -3,6 +3,8 @@
 #include <LiquidCrystal_I2C.h>
 #include <Wire.h>
 
+
+//Definition of the GPIO pins that are used to send data to the lcd display
 #define SDA 13
 #define SCL 14
 
@@ -17,13 +19,15 @@ void setup() {
   Serial.begin(115200);
   Serial.println("hello World!");
 
+  //This call for the wire lib, allows the esp32 to establish connection with the pins of the lcd that receives data
   Wire.begin(SDA,SCL);
 
   lcd.init();
   lcd.backlight();
   lcd.setCursor(0,0);
 
-  WiFi.begin(ssid,password);
+  //init of wifi connection
+  WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
@@ -33,6 +37,8 @@ void setup() {
 }
 
 void loop() {
+
+  //prints the local IP in the lcd display
   lcd.setCursor(0,0);
   lcd.print("WifiNetwork:");
   lcd.setCursor(0,1);
